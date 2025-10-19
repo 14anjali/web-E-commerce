@@ -1,0 +1,5 @@
+[
+  { "id": 1, "title": "Wireless Headphones", "price": 49.99, "image": "https://via.placeholder.com/150" },
+  { "id": 2, "title": "Smart Watch", "price": 89.99, "image": "https://via.placeholder.com/150" },
+  { "id": 3, "title": "Laptop Sleeve", "price": 25.0, "image": "https://via.placeholder.com/150" }
+]
