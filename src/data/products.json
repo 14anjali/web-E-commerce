@@ -1,5 +1,331 @@
 [
-  { "id": 1, "title": "Wireless Headphones", "price": 49.99, "image": "https://via.placeholder.com/150" },
-  { "id": 2, "title": "Smart Watch", "price": 89.99, "image": "https://via.placeholder.com/150" },
-  { "id": 3, "title": "Laptop Sleeve", "price": 25.0, "image": "https://via.placeholder.com/150" }
+  {"id":1,"title":"Men's Cotton T-Shirt","price":599,"category":"Clothing","image":"https://images.unsplash.com/photo-1552642986-ccb41e7059e7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Comfortable cotton t-shirt for daily wear."},
+  {"id":2,"title":"Women's Casual Dress","price":1299,"category":"Clothing","image":"https://images.unsplash.com/photo-1602010069450-0a62034f235c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=737","description":"Stylish casual dress for all occasions."},
+  {"id":3,"title":"Men's Jeans","price":1499,"category":"Clothing","image":"https://images.unsplash.com/photo-1548883354-7622d03aca27?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Durable denim jeans for everyday comfort."},
+  {"id":4,"title":"Women's Jacket","price":2599,"category":"Clothing","image":"https://plus.unsplash.com/premium_photo-1675186049366-64a655f8f537?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Warm and trendy jacket for winter."},
+  {"id":5,"title":"Men's Shorts","price":799,"category":"Clothing","image":"https://images.unsplash.com/photo-1617953644310-e690da9be982?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880","description":"Comfortable cotton shorts for summer."},
+  {"id":6,"title":"Bluetooth Headphones","price":2999,"category":"Electronics","image":"https://images.unsplash.com/photo-1637780852590-8ab27248ec41?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=765","description":"Wireless headphones with noise cancellation."},
+  {"id":7,"title":"Smart Watch","price":4999,"category":"Electronics","image":"https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=888","description":"Track your fitness and notifications with ease."},
+  {"id":8,"title":"Portable Speaker","price":1999,"category":"Electronics","image":"https://images.unsplash.com/photo-1705090212627-004b20f6a0fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735","description":"Compact speaker with powerful sound."},
+  {"id":9,"title":"Smartphone","price":15999,"category":"Electronics","image":"https://images.unsplash.com/photo-1663245482988-22fad02654e3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170","description":"Latest model smartphone with high performance."},
+  {"id":10,"title":"Laptop","price":45999,"category":"Electronics","image":"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171","description":"Powerful laptop for work and gaming."},
+  {"id":11,"title":"Coffee Maker","price":3999,"category":"Home","image":"https://images.unsplash.com/photo-1612199785871-f5a33768568e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1074","description":"Brew perfect coffee at home effortlessly."},
+  {"id":12,"title":"Microwave Oven","price":7999,"category":"Home","image":"https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1176","description":"High-quality microwave for your kitchen."},
+  {"id":13,"title":"Vacuum Cleaner","price":5999,"category":"Home","image":"https://images.unsplash.com/photo-1722710070534-e31f0290d8de?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1035","description":"Keep your home dust-free and clean."},
+  {"id":14,"title":"Dining Table","price":15999,"category":"Home","image":"https://images.unsplash.com/photo-1577140917170-285929fb55b7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1287","description":"Elegant wooden dining table for your home."},
+  {"id":15,"title":"Sofa Set","price":29999,"category":"Home","image":"https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170","description":"Comfortable sofa set for your living room."},
+  {"id":16,"title":"Leather Wallet","price":1499,"category":"Accessories","image":"https://images.unsplash.com/photo-1620109176813-e91290f6c795?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170","description":"Premium leather wallet with multiple compartments."},
+  {"id":17,"title":"Sunglasses","price":899,"category":"Accessories","image":"https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880","description":"Stylish sunglasses to protect your eyes."},
+  {"id":18,"title":"Backpack","price":1999,"category":"Accessories","image":"https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688","description":"Durable backpack suitable for travel and daily use."},
+  {"id":19,"title":"Watch","price":5999,"category":"Accessories","image":"https://images.unsplash.com/photo-1547996160-81dfa63595aa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Elegant wristwatch with leather strap."},
+  {"id":20,"title":"Belt","price":799,"category":"Accessories","image":"https://images.unsplash.com/photo-1624222247344-550fb60583dc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170","description":"Classic leather belt for formal and casual wear."},
+  {"id":21,"title":"Lipstick Set","price":999,"category":"Beauty","image":"https://images.unsplash.com/photo-1542452255191-c85a98f2c5d1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Long-lasting vibrant lipstick set."},
+  {"id":22,"title":"Face Cream","price":1299,"category":"Beauty","image":"https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Moisturizing face cream for glowing skin."},
+  {"id":23,"title":"Perfume","price":1999,"category":"Beauty","image":"https://images.unsplash.com/photo-1547887537-6158d64c35b3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Refreshing fragrance for all occasions."},
+  {"id":24,"title":"Hair Dryer","price":1499,"category":"Beauty","image":"https://images.unsplash.com/photo-1727364438136-6edc10ef0a52?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627","description":"Fast drying hair dryer with cool setting."},
+  {"id":25,"title":"Makeup Kit","price":2999,"category":"Beauty","image":"https://images.unsplash.com/photo-1616529484745-85f885b9889a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169","description":"Complete makeup kit for daily use."},
+  {"id":26,"title":"Tennis Racket","price":3999,"category":"Sports","image":"https://images.unsplash.com/photo-1602211844066-d3bb556e983b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1113","description":"Lightweight tennis racket for all levels."},
+  {"id":27,"title":"Football","price":999,"category":"Sports","image":"https://plus.unsplash.com/premium_photo-1684888759266-ce3768052c80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Durable football for indoor and outdoor games."},
+  {"id":28,"title":"Yoga Mat","price":1499,"category":"Sports","image":"https://images.unsplash.com/photo-1746796751590-a8c0f15d4900?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1074","description":"Comfortable non-slip yoga mat."},
+  {"id":29,"title":"Dumbbell Set","price":2999,"category":"Sports","image":"https://media.istockphoto.com/id/824609234/photo/dumbbel-on-white-background.jpg?s=612x612&w=0&k=20&c=1O2LZBAr6woRRbldOjg-KhRRw3eDpsZFXqnFnGEc1TE=","description":"Adjustable dumbbells for home workouts."},
+  {"id":30,"title":"Cycling Helmet","price":1999,"category":"Sports","image":"https://images.unsplash.com/photo-1701522814809-c339c2b60a7b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1172","description":"Protective helmet for safe cycling."},
+  {"id":31,"title":"Action Figure","price":999,"category":"Toys","image":"https://images.unsplash.com/photo-1558679908-541bcf1249ff?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Collectible action figure toy."},
+  {"id":32,"title":"Puzzle Game","price":499,"category":"Toys","image":"https://images.unsplash.com/photo-1590763960921-957dfe91acf7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1065","description":"Fun puzzle game for kids."},
+  {"id":33,"title":"Remote Car","price":1499,"category":"Toys","image":"https://images.unsplash.com/photo-1646162522783-50acdefc92a3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Remote-controlled car with rechargeable battery."},
+  {"id":34,"title":"Building Blocks","price":1299,"category":"Toys","image":"https://images.unsplash.com/photo-1575364289437-fb1479d52732?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1074","description":"Creative building block set for kids."},
+  {"id":35,"title":"Doll Set","price":899,"category":"Toys","image":"https://images.unsplash.com/photo-1563291589-4e9a1757428d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Set of dolls with accessories for play."},
+  {"id":36,"title":"Fiction Novel","price":399,"category":"Books","image":"https://images.unsplash.com/photo-1760448847959-bd3aec9e672c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735","description":"Engaging fiction novel for readers."},
+  {"id":37,"title":"Science Book","price":599,"category":"Books","image":"https://images.unsplash.com/photo-1619164025189-5c01101dfa46?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687","description":"Educational science book for students."},
+  {"id":38,"title":"History Book","price":499,"category":"Books","image":"https://images.unsplash.com/photo-1664674929026-b8f8ca18530c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735","description":"Learn world history with this detailed book."},
+  {"id":39,"title":"Children's Story Book","price":399,"category":"Books","image":"https://images.unsplash.com/photo-1631694161067-1d81ffa44e6b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1024","description":"Fun and engaging storybook for children."},
+  {"id":40,"title":"Cooking Recipe Book","price":699,"category":"Books","image":"https://images.unsplash.com/photo-1622028533897-3d38006b70a7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=929","description":"Collection of easy and tasty recipes."},
+  {
+    "id": 41,
+    "title": "Wireless Earbuds X100",
+    "price": 49.99,
+    "description": "High-quality sound with noise cancellation and long battery life.",
+    "category": "electronics",
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "id": 42,
+    "title": "Smart Fitness Watch",
+    "price": 79.99,
+    "description": "Track your fitness goals, heart rate, and sleep patterns.",
+    "category": "electronics",
+    "image": "https://images.unsplash.com/photo-1592507595940-edcec54727e2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 43,
+    "title": "Classic Leather Wallet",
+    "price": 29.99,
+    "description": "Durable and stylish wallet for everyday use.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1606503825008-909a67e63c3d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1025"
+  },
+  {
+    "id": 44,
+    "title": "Running Shoes Pro",
+    "price": 89.99,
+    "description": "Comfortable and lightweight shoes for runners.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171"
+  },
+  {
+    "id": 45,
+    "title": "Ceramic Coffee Mug Set",
+    "price": 19.99,
+    "description": "Set of 4 mugs, perfect for your morning coffee.",
+    "category": "home",
+    "image": "https://plus.unsplash.com/premium_photo-1666974543981-38c24049910d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+  },
+  {
+    "id": 46,
+    "title": "Memory Foam Pillow",
+    "price": 39.99,
+    "description": "Ergonomic pillow for a better night's sleep.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1570786240066-c0d753711cfe?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=881"
+  },
+  {
+    "id": 47,
+    "title": "Blender Pro 500",
+    "price": 59.99,
+    "description": "High-speed blender for smoothies, soups, and sauces.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1749953680414-62d2afc6c29c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1032"
+  },
+  {
+    "id": 48,
+    "title": "Stainless Steel Water Bottle",
+    "price": 24.99,
+    "description": "Keep your drinks cold or hot for hours.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1544003484-3cd181d17917?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764"
+  },
+  {
+    "id": 49,
+    "title": "Yoga Mat Eco",
+    "price": 34.99,
+    "description": "Non-slip, eco-friendly mat for yoga and pilates.",
+    "category": "sports",
+    "image": "https://images.unsplash.com/photo-1637157216470-d92cd2edb2e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+  },
+  {
+    "id": 50,
+    "title": "Basketball Pro League",
+    "price": 49.99,
+    "description": "Official size and weight basketball for indoor/outdoor use.",
+    "category": "sports",
+    "image": "https://plus.unsplash.com/premium_photo-1668767725891-58f5cd788105?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 51,
+    "title": "Camping Tent 3-Person",
+    "price": 129.99,
+    "description": "Durable tent with waterproof coating and easy setup.",
+    "category": "sports",
+    "image": "https://images.unsplash.com/photo-1624923686627-514dd5e57bae?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 52,
+    "title": "Wireless Keyboard and Mouse Combo",
+    "price": 39.99,
+    "description": "Ergonomic keyboard and mouse set for PC and laptop.",
+    "category": "electronics",
+    "image": "https://images.unsplash.com/photo-1760482280819-3212f185d50d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1032"
+  },
+  {
+    "id": 53,
+    "title": "Noise Cancelling Headphones",
+    "price": 99.99,
+    "description": "Block out unwanted sounds and enjoy immersive audio.",
+    "category": "electronics",
+    "image": "https://plus.unsplash.com/premium_photo-1679513691474-73102089c117?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1113"
+  },
+  {
+    "id": 54,
+    "title": "Men's Denim Jacket",
+    "price": 59.99,
+    "description": "Classic denim jacket for a stylish casual look.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1588807038379-26013f1be113?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1034"
+  },
+  {
+    "id": 55,
+    "title": "Women's Running Sneakers",
+    "price": 79.99,
+    "description": "Lightweight shoes designed for comfort and performance.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1651573091103-530884aa68ff?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764"
+  },
+  {
+    "id": 56,
+    "title": "LED Desk Lamp",
+    "price": 29.99,
+    "description": "Adjustable brightness with modern design for your desk.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1571406487954-dc11b0c0767d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 57,
+    "title": "Electric Kettle 1.7L",
+    "price": 39.99,
+    "description": "Fast-boiling kettle with auto shut-off and safety features.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1738520420636-a1591b84723e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 58,
+    "title": "Football Official Size",
+    "price": 29.99,
+    "description": "Durable football for outdoor games and training.",
+    "category": "sports",
+    "image": "https://images.unsplash.com/photo-1589457088828-9fa17cc032cf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 59,
+    "title": "Sports Water Bottle 750ml",
+    "price": 19.99,
+    "description": "Leak-proof bottle for hydration during workouts.",
+    "category": "sports",
+    "image": "https://plus.unsplash.com/premium_photo-1723651262792-9220b2fae964?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+  },
+  {
+    "id": 60,
+    "title": "Portable Power Bank 10000mAh",
+    "price": 49.99,
+    "description": "Compact power bank to charge your devices on the go.",
+    "category": "electronics",
+    "image": "https://images.unsplash.com/photo-1706275399494-fb26bbc5da63?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880"
+  },
+  {
+    "id": 61,
+    "title": "Bluetooth Speaker Mini",
+    "price": 34.99,
+    "description": "Portable speaker with powerful sound and bass.",
+    "category": "electronics",
+    "image": "https://media.istockphoto.com/id/2196900329/photo/man-enjoys-his-favorite-tunes-while-scrolling-through-his-smartphone.jpg?s=612x612&w=0&k=20&c=_WD4bf811dDOclXx908ToiFffkTZ251Hug_LskTwkgA="
+  },
+  {
+    "id": 62,
+    "title": "Men's Casual Shirt",
+    "price": 39.99,
+    "description": "Slim fit shirt for daily wear and office use.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=992"
+  },
+  {
+    "id": 63,
+    "title": "Women's Casual Top",
+    "price": 29.99,
+    "description": "Lightweight and stylish top for casual outings.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1587070297440-7b8a62eb01c4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 64,
+    "title": "Home Office Chair",
+    "price": 129.99,
+    "description": "Ergonomic chair with adjustable height and lumbar support.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1612372606404-0ab33e7187ee?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=678"
+  },
+  {
+    "id": 65,
+    "title": "Wall Clock Modern",
+    "price": 24.99,
+    "description": "Minimalistic wall clock for home and office.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1609980775647-1fb1ef376268?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735"
+  },
+  {
+    "id": 66,
+    "title": "Trekking Backpack 40L",
+    "price": 89.99,
+    "description": "Durable backpack for hiking and outdoor adventures.",
+    "category": "sports",
+    "image": "https://images.unsplash.com/photo-1681334921874-5bafe8acf433?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 67,
+    "title": "Camping Sleeping Bag",
+    "price": 59.99,
+    "description": "Comfortable sleeping bag for outdoor camping trips.",
+    "category": "sports",
+    "image": "https://images.unsplash.com/photo-1558477280-1bfed08ea5db?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688"
+  },
+  {
+    "id": 68,
+    "title": "Laptop Stand Adjustable",
+    "price": 34.99,
+    "description": "Ergonomic stand to improve laptop viewing angle.",
+    "category": "electronics",
+    "image": "https://images.unsplash.com/photo-1629317480826-910f729d1709?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1074"
+  },
+  {
+    "id": 69,
+    "title": "Portable USB Fan",
+    "price": 19.99,
+    "description": "Small fan powered by USB, ideal for desk use.",
+    "category": "electronics",
+    "image": "https://images.unsplash.com/photo-1679756847942-e19081bb79e3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  },
+  {
+    "id": 70,
+    "title": "Smartphone Holder Car",
+    "price": 14.99,
+    "description": "Adjustable holder for smartphones in vehicles.",
+    "category": "electronics",
+    "image": "https://images.unsplash.com/photo-1760443728230-b84a87381f8f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=685"
+  },
+  {
+    "id": 71,
+    "title": "Wireless Charging Pad",
+    "price": 29.99,
+    "description": "Fast wireless charger compatible with most smartphones.",
+    "category": "electronics",
+    "image": "https://images.unsplash.com/photo-1606077095660-726118e877fd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688"
+  },
+  {
+    "id": 72,
+    "title": "Men's Hoodie Sweatshirt",
+    "price": 49.99,
+    "description": "Comfortable and warm hoodie for everyday wear.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1642978277577-83c6ceac4820?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764"
+  },
+  {
+    "id": 73,
+    "title": "Women's Summer Dress",
+    "price": 59.99,
+    "description": "Lightweight and stylish dress for casual outings.",
+    "category": "fashion",
+    "image": "https://images.unsplash.com/photo-1563178406-4cdc2923acbc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=696"
+  },
+  {
+    "id": 74,
+    "title": "Kitchen Knife Set 6pcs",
+    "price": 39.99,
+    "description": "High-quality stainless steel knives for your kitchen.",
+    "category": "home",
+    "image": "https://images.unsplash.com/photo-1589071634465-75d7ce737fa8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+  },
+  {
+    "id": 75,
+    "title": "Coffee Maker 12-Cup",
+    "price": 69.99,
+    "description": "Brew delicious coffee with this easy-to-use machine.",
+    "category": "home",
+    "image": "https://plus.unsplash.com/premium_photo-1671379498511-80aabd92e69f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=988"
+  },
+  {
+    "id": 76,
+    "title": "Tennis Racket Pro",
+    "price": 79.99,
+    "description": "Lightweight racket for players of all skill levels.",
+    "category": "sports",
+    "image": "https://plus.unsplash.com/premium_photo-1736900468189-9f80d7659f87?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+  }
+  
 ]

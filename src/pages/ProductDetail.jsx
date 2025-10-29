@@ -1,39 +1,50 @@
-import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
-import products from "../data/products.json";
-import { CartContext } from "../context/CartContext";
+import React, { useState, useEffect } from "react";
+import ProductCard from "../components/ProductCard";
+import productsData from "../data/products.json";
 
-const ProductDetail = () => {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id));
-  const { addToCart } = useContext(CartContext);
-  const [quantity, setQuantity] = useState(1);
+const Home = () => {
+  const productsPerPage = 15;
+  const totalPages = Math.ceil(productsData.length / productsPerPage);
 
-  if (!product) return <p>Product not found</p>;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentProducts, setCurrentProducts] = useState([]);
+
+  // Shuffle and slice products for current page
+  useEffect(() => {
+    const shuffled = [...productsData].sort(() => Math.random() - 0.5);
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    setCurrentProducts(shuffled.slice(startIndex, endIndex));
+  }, [currentPage]);
 
   return (
-    <div className="p-4">
-      <div className="md:flex md:gap-6">
-        <img src={product.image} alt={product.title} className="w-full md:w-1/2 h-80 object-cover"/>
-        <div className="mt-4 md:mt-0">
-          <h2 className="text-2xl font-bold">{product.title}</h2>
-          <p className="text-gray-700 mt-2">{product.description}</p>
-          <p className="text-xl font-semibold mt-2">${product.price}</p>
-          <div className="mt-4 flex items-center gap-2">
-            <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="px-2 bg-gray-200 rounded">-</button>
-            <span>{quantity}</span>
-            <button onClick={() => setQuantity(q => q + 1)} className="px-2 bg-gray-200 rounded">+</button>
-          </div>
+    <div className="p-4 max-w-7xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6 text-center">🛍 Featured Products</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {currentProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+
+      {/* Pagination Buttons */}
+      <div className="flex justify-center mt-8 gap-2 flex-wrap">
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
           <button
-            onClick={() => addToCart(product, quantity)}
-            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            key={number}
+            onClick={() => setCurrentPage(number)}
+            className={`px-4 py-2 rounded ${
+              currentPage === number
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
           >
-            Add to Cart
+            {number}
           </button>
-        </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default ProductDetail;
+export default Home;
