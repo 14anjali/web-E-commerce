@@ -1,57 +1,79 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  // Convert USD to INR (1 USD ≈ ₹83)
-  const priceInINR = new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(product.price * 83);
+  // Calculate discounted price
+  const discountedPrice = (
+    product.price *
+    (1 - (product.discountPercentage || 0) / 100)
+  ).toFixed(2);
+
+  // Average rating
+  const avgRating = product.reviews?.length
+    ? (
+        product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+        product.reviews.length
+      ).toFixed(1)
+    : product.rating || "N/A";
 
   return (
-    <div className="border rounded-lg shadow hover:shadow-xl transition duration-300 bg-white flex flex-col">
-      {/* Image Container */}
-      <div className="flex justify-center items-center bg-gray-100 h-64 overflow-hidden rounded-t-lg">
+    <div className="bg-white border rounded-lg shadow hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden group">
+      {/* Product Image */}
+      <div className="relative overflow-hidden">
         <img
-          src={product.image}
+          src={product.thumbnail || product.images[0]}
           alt={product.title}
-          className="object-contain h-full w-full p-4"
-          loading="lazy"
+          className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
+        {/* Discount Badge */}
+        {product.discountPercentage && (
+          <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
+            -{product.discountPercentage}%
+          </span>
+        )}
+        {/* Category Badge */}
+        {product.category && (
+          <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded capitalize">
+            {product.category}
+          </span>
+        )}
       </div>
 
       {/* Product Info */}
       <div className="p-4 flex flex-col flex-1">
-        <h2
-          className="font-semibold text-lg mb-2 line-clamp-2"
-          title={product.title}
-        >
-          {product.title}
-        </h2>
+        <h2 className="font-semibold text-lg line-clamp-2">{product.title}</h2>
 
-        <p className="text-gray-700 font-medium mb-4">{priceInINR}</p>
+        <div className="mt-1 flex items-center space-x-2">
+          <span className="text-red-500 font-bold text-lg">${discountedPrice}</span>
+          {product.discountPercentage && (
+            <span className="line-through text-gray-400">${product.price}</span>
+          )}
+        </div>
 
-        {/* Actions */}
-        <div className="mt-auto flex gap-2">
+        {/* Rating */}
+        <div className="flex items-center mt-2">
+          <span className="text-yellow-500 font-semibold mr-2">⭐ {avgRating}</span>
+          <span className="text-gray-500 text-sm">({product.reviews?.length || 0})</span>
+        </div>
+
+        {/* Buttons */}
+        <div className="mt-4 flex gap-2">
           <button
-            onClick={() => addToCart(product, 1)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex-1 transition"
-            aria-label={`Add ${product.title} to cart`}
+            onClick={() => addToCart(product)}
+            className="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-300"
           >
             Add to Cart
           </button>
-
-          <Link
-            to={`/product/${product.id}`}
-            className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-900 flex-1 text-center transition"
-            aria-label={`View details of ${product.title}`}
+          <button
+            onClick={() => navigate(`/product/${product.id}`)}
+            className="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded hover:bg-gray-300 transition-colors duration-300"
           >
-            View
-          </Link>
+            View Product
+          </button>
         </div>
       </div>
     </div>
