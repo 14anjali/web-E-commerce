@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import Filter from "../components/Filter";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -7,7 +8,10 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const productsPerPage = 12; // Show 12 products per page
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [sortOrder, setSortOrder] = useState("default");
+
+  const productsPerPage = 12;
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
@@ -26,11 +30,23 @@ const Home = () => {
       });
   }, []);
 
-  // Pagination logic
+  // 🔹 Get unique categories for dropdown
+  const categories = [...new Set(products.map((p) => p.category))];
+
+  // 🔹 Apply filters and sorting before pagination
+  const filteredProducts = products
+    .filter((p) => selectedCategory === "All" || p.category === selectedCategory)
+    .sort((a, b) => {
+      if (sortOrder === "low-high") return a.price - b.price;
+      if (sortOrder === "high-low") return b.price - a.price;
+      return 0;
+    });
+
+  // 🔹 Pagination logic (after filtering)
   const indexOfLast = currentPage * productsPerPage;
   const indexOfFirst = indexOfLast - productsPerPage;
-  const currentProducts = products.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(products.length / productsPerPage);
+  const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   if (loading)
     return <p className="p-6 text-center text-gray-600">Loading products...</p>;
@@ -44,14 +60,35 @@ const Home = () => {
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">🛍 Featured Products</h1>
 
-      {/* Products Grid */}
+      {/* 🔹 Filter Component */}
+      <Filter
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={(value) => {
+          setSelectedCategory(value);
+          setCurrentPage(1); // Reset page when filter changes
+        }}
+        sortOrder={sortOrder}
+        onSortChange={(value) => {
+          setSortOrder(value);
+          setCurrentPage(1);
+        }}
+      />
+
+      {/* 🔹 Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {currentProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {currentProducts.length > 0 ? (
+          currentProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <p className="col-span-full text-center text-gray-500">
+            No products found for this category.
+          </p>
+        )}
       </div>
 
-      {/* Pagination */}
+      {/* 🔹 Pagination */}
       <div className="flex justify-center mt-6 space-x-2">
         {Array.from({ length: totalPages }, (_, i) => (
           <button
