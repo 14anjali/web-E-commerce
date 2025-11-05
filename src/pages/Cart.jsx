@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity, total } = useContext(CartContext);
@@ -19,6 +20,8 @@ const Cart = () => {
   }
 
   return (
+    <>
+ 
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">🛒 Your Cart</h1>
 
@@ -83,7 +86,7 @@ const Cart = () => {
           Checkout
         </button>
       </div>
-    </div>
+    </div></>
   );
 };
 

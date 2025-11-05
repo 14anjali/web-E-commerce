@@ -4,6 +4,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   // Add item to cart
   const addToCart = (product, quantity = 1) => {
@@ -31,12 +32,36 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // Toggle wishlist
+  const toggleWishlist = (product) => {
+    const exists = wishlist.some((item) => item.id === product.id);
+    if (exists) {
+      setWishlist((prev) => prev.filter((item) => item.id !== product.id));
+    } else {
+      setWishlist((prev) => [...prev, product]);
+    }
+  };
+
+  // Remove from wishlist
+  const removeFromWishlist = (productId) => {
+    setWishlist((prev) => prev.filter((item) => item.id !== productId));
+  };
+
   // Cart total
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, updateQuantity, total }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        total,
+        wishlist,
+        toggleWishlist,
+        removeFromWishlist,
+      }}
     >
       {children}
     </CartContext.Provider>
