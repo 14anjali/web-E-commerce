@@ -57,7 +57,7 @@ const Wishlist = () => {
               {/* Remove from Wishlist */}
               <button
                 onClick={() => removeFromWishlist(product.id)}
-                className="flex-1 py-2 px-4 rounded font-semibold text-white bg-red-600 hover:bg-red-700 transition"
+                className="flex-1 p2 rounded font-semibold text-white bg-red-600 hover:bg-red-700 transition"
               >
                 Remove
               </button>
