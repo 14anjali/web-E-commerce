@@ -4,18 +4,17 @@ import Navbar from "../components/Navbar";
 import Filter from "../components/Filter";
 
 const Home = () => {
-  const [products, setProducts] = useState([]); // All products
+  const [products, setProducts] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [search, setSearch] = useState(""); // Search term
-  const [selectedCategory, setSelectedCategory] = useState("All"); // Filter category
-  const [sortOrder, setSortOrder] = useState("default"); // Sort order
+  const [search, setSearch] = useState(""); 
+  const [selectedCategory, setSelectedCategory] = useState("All"); 
+  const [sortOrder, setSortOrder] = useState("default"); 
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
 
-  const [categories, setCategories] = useState([]); // Unique categories for filter
-
+  const [categories, setCategories] = useState([]); 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
