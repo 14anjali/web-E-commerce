@@ -8,7 +8,7 @@ const Navbar = () => {
   const wishlistCount = wishlist.length;
 
   return (
-    <nav className="bg-[#2874f0] flex items-center px-4 h-16 shadow">
+    <nav className="bg-[#2874f0] flex items-center px-4 h-16 shadow sticky top-0 z-50">
       {/* Brand */}
       <Link to="/" className="flex flex-col justify-center mr-4 flex-shrink-0">
         <span className="text-white font-extrabold text-2xl leading-none">MyStore</span>

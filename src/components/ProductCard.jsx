@@ -29,26 +29,32 @@ const ProductCard = ({ product }) => {
       <img
         src={product.thumbnail || product.images?.[0]}
         alt={product.title}
-        className="h-48 w-full object-cover cursor-pointer"
+        className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover cursor-pointer"
         onClick={() => navigate(`/product/${product.id}`)}
       />
 
       {/* Wishlist Heart */}
       <button
         onClick={() => toggleWishlist(product)}
-        className="absolute top-2 right-2 text-2xl transition-colors"
+        className="absolute top-2 right-2 text-xl sm:text-2xl transition-colors"
       >
-        {inWishlist ? "❤️" : "🤍"} {/* Filled vs outlined heart */}
+        {inWishlist ? "❤️" : "🤍"}
       </button>
 
       {/* Product Info */}
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-semibold text-lg mb-1 line-clamp-2">{product.title}</h3>
-        <p className="text-gray-500 text-sm mb-2 line-clamp-2">{product.description}</p>
-        <span className="text-red-600 font-bold mb-3">${product.price}</span>
+      <div className="p-3 sm:p-4 flex flex-col flex-1">
+        <h3 className="font-semibold text-sm sm:text-base md:text-lg mb-1 line-clamp-2">
+          {product.title}
+        </h3>
+        <p className="text-gray-500 text-xs sm:text-sm md:text-base mb-2 line-clamp-2">
+          {product.description}
+        </p>
+        <span className="text-red-600 font-bold mb-3 text-sm sm:text-base md:text-lg">
+          ${product.price}
+        </span>
 
         {/* Buttons */}
-        <div className="flex gap-2 mt-auto">
+        <div className="flex flex-col sm:flex-row gap-2 mt-auto">
           {/* Add / Added Button */}
           <button
             onClick={!inCart ? handleAddToCart : undefined}
@@ -67,7 +73,7 @@ const ProductCard = ({ product }) => {
             onClick={() =>
               inCart ? navigate("/cart") : navigate(`/product/${product.id}`)
             }
-            className={`flex-1 p2 rounded font-semibold transition ${
+            className={`flex-1 py-2 px-4 rounded font-semibold transition ${
               inCart
                 ? "bg-green-600 text-white hover:bg-green-700"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
