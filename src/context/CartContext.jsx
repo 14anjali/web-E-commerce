@@ -3,27 +3,56 @@ import React, { createContext, useState, useEffect } from "react";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  // Load initial data from localStorage
-  const [cartItems, setCartItems] = useState(() => {
-    const saved = localStorage.getItem("cartItems");
-    return saved ? JSON.parse(saved) : [];
-  });
+  // -----------------------------
+  // 1️⃣ Current user state
+  // -----------------------------
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser")) || null
+  );
 
-  const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem("wishlist");
-    return saved ? JSON.parse(saved) : [];
-  });
+  // -----------------------------
+  // 2️⃣ Cart & Wishlist state
+  // -----------------------------
+  const [cartItems, setCartItems] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
-  // Sync cart and wishlist with localStorage
+  // -----------------------------
+  // 3️⃣ Load cart & wishlist when currentUser changes
+  // -----------------------------
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+    if (currentUser) {
+      const key = currentUser.email;
+      const savedCart = JSON.parse(localStorage.getItem(`cart_${key}`)) || [];
+      const savedWishlist =
+        JSON.parse(localStorage.getItem(`wishlist_${key}`)) || [];
+      setCartItems(savedCart);
+      setWishlist(savedWishlist);
+    } else {
+      setCartItems([]);
+      setWishlist([]);
+    }
+  }, [currentUser]);
+
+  // -----------------------------
+  // 4️⃣ Save cart & wishlist whenever they change
+  // -----------------------------
+  useEffect(() => {
+    if (currentUser) {
+      const key = currentUser.email;
+      localStorage.setItem(`cart_${key}`, JSON.stringify(cartItems));
+    }
+  }, [cartItems, currentUser]);
 
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
+    if (currentUser) {
+      const key = currentUser.email;
+      localStorage.setItem(`wishlist_${key}`, JSON.stringify(wishlist));
+    }
+  }, [wishlist, currentUser]);
 
-  // --- CART FUNCTIONS ---
+  // -----------------------------
+  // 5️⃣ Cart functions
+  // -----------------------------
   const addToCart = (product, quantity = 1) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
@@ -33,9 +62,8 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
-      } else {
-        return [...prev, { ...product, quantity }];
       }
+      return [...prev, { ...product, quantity }];
     });
   };
 
@@ -51,7 +79,9 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // --- WISHLIST FUNCTIONS ---
+  // -----------------------------
+  // 6️⃣ Wishlist functions
+  // -----------------------------
   const toggleWishlist = (product) => {
     const exists = wishlist.some((item) => item.id === product.id);
     if (exists) {
@@ -65,15 +95,29 @@ export const CartProvider = ({ children }) => {
     setWishlist((prev) => prev.filter((item) => item.id !== productId));
   };
 
-  // --- CART TOTAL ---
+  // -----------------------------
+  // 7️⃣ Cart total
+  // -----------------------------
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
+  // -----------------------------
+  // 8️⃣ Logout function
+  // -----------------------------
+  const logout = () => {
+    localStorage.removeItem("currentUser");
+    setCurrentUser(null);
+    setCartItems([]);
+    setWishlist([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
+        currentUser,
+        setCurrentUser, // required to update user on login
         cartItems,
         addToCart,
         removeFromCart,
@@ -82,6 +126,7 @@ export const CartProvider = ({ children }) => {
         wishlist,
         toggleWishlist,
         removeFromWishlist,
+        logout,
       }}
     >
       {children}
