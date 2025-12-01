@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { CartContext } from "../context/CartContext";
 
 const ProductDetail = () => {
@@ -62,7 +61,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Navbar />
+    
       <div className="max-w-6xl mx-auto p-6">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Left: Images and Wishlist */}

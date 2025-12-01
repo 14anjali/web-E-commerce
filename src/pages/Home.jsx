@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,17 +20,26 @@ const Home = () => {
 
   const [categories, setCategories] = useState([]);
 
+  // Fetch products and prepare random subset
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch("https://dummyjson.com/products?limit=1000");
         if (!res.ok) throw new Error("Failed to fetch products");
         const data = await res.json();
-        setProducts(data.products);
-        setLoading(false);
 
+        setProducts(data.products);
+
+        // Shuffle and select 20 random products
+        const shuffled = [...data.products].sort(() => 0.5 - Math.random());
+        const randomSubset = shuffled.slice(0, 20);
+        setDisplayProducts(randomSubset);
+
+        // Get unique categories
         const uniqueCategories = [...new Set(data.products.map((p) => p.category))];
         setCategories(uniqueCategories);
+
+        setLoading(false);
       } catch (err) {
         console.error(err);
         setError("Unable to load products. Please try again later.");
@@ -39,10 +49,10 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = products
+  // Filter and sort displayProducts
+  const filteredProducts = displayProducts
     .filter((p) => {
-      const matchesCategory =
-        selectedCategory === "All" ? true : p.category === selectedCategory;
+      const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
       const matchesSearch =
         p.title.toLowerCase().includes(search.toLowerCase()) ||
         p.category.toLowerCase().includes(search.toLowerCase());
@@ -69,114 +79,81 @@ const Home = () => {
     infinite: true,
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
   };
 
-  if (loading)
-    return <p className="p-6 text-center text-gray-600">Loading products...</p>;
-  if (error)
-    return <p className="p-6 text-center text-red-600 font-semibold">{error}</p>;
+  if (loading) return <p className="p-6 text-center text-gray-600">Loading products...</p>;
+  if (error) return <p className="p-6 text-center text-red-600 font-semibold">{error}</p>;
 
   return (
     <>
-      <Navbar onSearch={(value) => { setSearch(value); setCurrentPage(1); }} />
+      <Navbar onSearch={setSearch} />
 
-      <div className="w-full">
-        {/* Slider / Banner */}
-        <div className="w-full mb-6 mt-2">
+      <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto">
+
+        {/* Slider */}
+        <div className="mb-6 mt-2">
           <Slider {...sliderSettings}>
-            <div>
-              <img
-                src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grocery-sale-retail-or-e-commerce-banner-ad-design-template-67720435bb809be27f46dfb1dd44c6fa_screen.jpg?ts=1606113265"
-                alt="Banner 1"
-                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg"
-              />
-            </div>
-            <div>
-              <img
-                src="https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg"
-                alt="Banner 2"
-                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg"
-              />
-            </div>
-            <div>
-              <img
-                src="https://static.vecteezy.com/system/resources/thumbnails/006/642/998/small/online-shopping-on-website-e-commerce-applications-and-digital-marketing-hand-holding-smartphonwith-the-delivery-man-template-for-banner-web-landing-page-social-media-flat-design-concept-vector.jpg"
-                alt="Banner 3"
-                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg"
-              />
-            </div>
+            {[
+              "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grocery-sale-retail-or-e-commerce-banner-ad-design-template-67720435bb809be27f46dfb1dd44c6fa_screen.jpg?ts=1606113265",
+              "https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg",
+              "https://static.vecteezy.com/system/resources/thumbnails/006/642/998/small/online-shopping-on-website-e-commerce-applications-and-digital-marketing-hand-holding-smartphonwith-the-delivery-man-template-for-banner-web-landing-page-social-media-flat-design-concept-vector.jpg"
+            ].map((url, idx) => (
+              <div key={idx}>
+                <img
+                  src={url}
+                  alt={`Banner ${idx + 1}`}
+                  className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg"
+                />
+              </div>
+            ))}
           </Slider>
         </div>
 
-        {/* Filter Component */}
-        <div className="px-4 sm:px-6 lg:px-8 flex-row">
-          <Filter
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onCategoryChange={(cat) => { setSelectedCategory(cat); setCurrentPage(1); }}
-            sortOrder={sortOrder}
-            onSortChange={(order) => setSortOrder(order)}
-          />
-        </div>
+        {/* Filters */}
+        <Filter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={(cat) => { setSelectedCategory(cat); setCurrentPage(1); }}
+          sortOrder={sortOrder}
+          onSortChange={(order) => setSortOrder(order)}
+        />
 
         {/* Products Grid */}
-        <div className="px-4 sm:px-6 lg:px-8 mt-6">
-          {currentProducts.length > 0 ? (
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {currentProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="transition-transform transform hover:scale-105 hover:shadow-2xl"
-                >
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-center text-gray-500 text-lg mt-10">
-              No products found.
-            </p>
-          )}
-        </div>
+        {currentProducts.length > 0 ? (
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
+            {currentProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 text-lg mt-10">No products found.</p>
+        )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center mt-6 space-x-2 px-4 sm:px-6 lg:px-8">
-            {currentPage > 1 && (
-              <button
-                onClick={() => goToPage(currentPage - 1)}
-                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 font-semibold"
-              >
-                &lt;
-              </button>
-            )}
-
-            {Array.from({ length: totalPages }, (_, i) => i + 1)
-              .slice(Math.max(0, currentPage - 2), Math.min(totalPages, currentPage + 1))
-              .map((page) => (
-                <button
-                  key={page}
-                  onClick={() => goToPage(page)}
-                  className={`px-4 py-2 rounded ${
-                    currentPage === page ? "bg-blue-600 text-white" : "bg-gray-200 hover:bg-gray-300"
-                  } font-semibold`}
-                >
-                  {page}
-                </button>
-              ))}
-
-            {currentPage < totalPages && (
-              <button
-                onClick={() => goToPage(currentPage + 1)}
-                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 font-semibold"
-              >
-                &gt;
-              </button>
-            )}
+          <div className="flex justify-center mt-6 gap-2">
+            <button
+              onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded font-semibold ${
+                currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              &lt;
+            </button>
+            <button
+              onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded font-semibold ${
+                currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              &gt;
+            </button>
           </div>
         )}
       </div>
