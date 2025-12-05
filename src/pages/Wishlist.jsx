@@ -24,6 +24,7 @@ const Wishlist = () => {
     return <p className="text-center text-gray-600 p-6">Your wishlist is empty.</p>;
 
   return (
+    <>
     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {wishlist.map((product) => (
         <div key={product.id} className="bg-white border rounded-lg shadow hover:shadow-lg transition duration-300 flex flex-col overflow-hidden relative">
@@ -65,8 +66,10 @@ const Wishlist = () => {
           </div>
         </div>
       ))}
-      <Footer/>
+      
     </div>
+    <Footer/>
+    </>
   );
 };
 
