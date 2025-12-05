@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity, total } = useContext(CartContext);
 
+  // -----------------------------
+  // If cart is empty
+  // -----------------------------
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh]">
@@ -19,11 +23,12 @@ const Cart = () => {
   }
 
   return (
-    <>
- 
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">🛒 Your Cart</h1>
 
+      {/* -----------------------------
+          Cart Items List
+          ----------------------------- */}
       <div className="flex flex-col gap-6">
         {cartItems.map((item) => (
           <div
@@ -78,14 +83,17 @@ const Cart = () => {
         ))}
       </div>
 
-      {/* Total & Checkout */}
+      {/* -----------------------------
+          Cart Total & Checkout
+          ----------------------------- */}
       <div className="mt-8 flex flex-col md:flex-row justify-between items-center md:items-end gap-4 md:gap-0 p-4 border-t border-gray-300">
         <p className="text-2xl font-bold">Total: ${total.toFixed(2)}</p>
         <button className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition duration-300">
           Checkout
         </button>
       </div>
-    </div></>
+      <Footer/>
+    </div>
   );
 };
 

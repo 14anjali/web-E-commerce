@@ -1,12 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Wishlist = () => {
   const { wishlist, addToCart, removeFromWishlist, cartItems } = useContext(CartContext);
   const navigate = useNavigate();
 
-  // Track which wishlist products are in cart
+  // -----------------------------
+  // Track which wishlist products are already in cart
+  // -----------------------------
   const [inCartMap, setInCartMap] = useState({});
 
   useEffect(() => {
@@ -23,10 +26,7 @@ const Wishlist = () => {
   return (
     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {wishlist.map((product) => (
-        <div
-          key={product.id}
-          className="bg-white border rounded-lg shadow hover:shadow-lg transition duration-300 flex flex-col overflow-hidden relative"
-        >
+        <div key={product.id} className="bg-white border rounded-lg shadow hover:shadow-lg transition duration-300 flex flex-col overflow-hidden relative">
           {/* Product Image */}
           <img
             src={product.thumbnail || product.images?.[0]}
@@ -57,7 +57,7 @@ const Wishlist = () => {
               {/* Remove from Wishlist */}
               <button
                 onClick={() => removeFromWishlist(product.id)}
-                className="flex-1 p2 rounded font-semibold text-white bg-red-600 hover:bg-red-700 transition"
+                className="flex-1 py-2 px-4 rounded font-semibold text-white bg-red-600 hover:bg-red-700 transition"
               >
                 Remove
               </button>
@@ -65,6 +65,7 @@ const Wishlist = () => {
           </div>
         </div>
       ))}
+      <Footer/>
     </div>
   );
 };
