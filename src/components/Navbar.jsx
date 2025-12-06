@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link, useLocation } from "react-router-dom";
 import ProductSearch from "./ProductSearch";
+import { ThemeContext, ThemeProvider } from "../context/ThemeContext";
 
 const Navbar = ({ onSearch }) => {
+    const {theme,toggleTheme} =useContext(ThemeContext)
   const { cartItems, wishlist } = useContext(CartContext);
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -62,6 +64,13 @@ const Navbar = ({ onSearch }) => {
             </span>
           )}
         </Link>
+        {/* Theme Toggle */}
+<button
+  onClick={toggleTheme}
+  className="text-white text-xl focus:outline-none"
+>
+  {theme === "light" ? "🌙" : "☀️"}
+</button>
       </div>
     </nav>
   );

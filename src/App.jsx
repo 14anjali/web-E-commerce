@@ -7,13 +7,15 @@ import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   // Global search state for Navbar
   const [search, setSearch] = useState("");
 
   return (
-    <CartProvider>
+    <ThemeProvider>
+        <CartProvider>
       <Router>
         {/* Global Navbar */}
         <Navbar onSearch={setSearch} />
@@ -33,6 +35,7 @@ function App() {
         </Routes>
       </Router>
     </CartProvider>
+        </ThemeProvider>
   );
 }
 
