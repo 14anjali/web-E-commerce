@@ -11,49 +11,40 @@ const Home = ({ search }) => {
   const [displayProducts, setDisplayProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortOrder, setSortOrder] = useState("default");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
-
   const [categories, setCategories] = useState([]);
 
-  // Fetch products only once
-useEffect(() => {
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch("https://dummyjson.com/products?limit=1000");
-      if (!res.ok) throw new Error("Failed to fetch products");
-      const data = await res.json();
+  // Fetch products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("https://dummyjson.com/products?limit=1000");
+        if (!res.ok) throw new Error("Failed to fetch products");
+        const data = await res.json();
 
-      setProducts(data.products); // keep all products for filtering
+        setProducts(data.products);
+        const shuffled = [...data.products].sort(() => 0.5 - Math.random());
+        setDisplayProducts(shuffled.slice(0, 20));
 
-      // Optional: featured products / random 20
-      const shuffled = [...data.products].sort(() => 0.5 - Math.random());
-      const randomSubset = shuffled.slice(0, 20);
-      setDisplayProducts(randomSubset); // can use for "featured" section
+        const uniqueCategories = [...new Set(data.products.map(p => p.category?.trim()).filter(Boolean))];
+        setCategories(uniqueCategories);
 
-      // Get unique categories and clean them
-      const uniqueCategories = [...new Set(
-        data.products.map((p) => p.category?.trim()).filter(Boolean)
-      )];
-      setCategories(uniqueCategories);
-
-      setLoading(false);
-    } catch (err) {
-      console.error(err);
-      setError("Unable to load products. Please try again later.");
-      setLoading(false);
-    }
-  };
-  fetchProducts();
-}, []);
-
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setError("Unable to load products. Please try again later.");
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   // Filter & sort
   const filteredProducts = displayProducts
-    .filter((p) => {
+    .filter(p => {
       const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
       const matchesSearch =
         !search || 
@@ -91,76 +82,75 @@ useEffect(() => {
   if (loading) return <p className="p-6 text-center text-gray-600">Loading products...</p>;
   if (error) return <p className="p-6 text-center text-red-600 font-semibold">{error}</p>;
 
-  return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto">
+  const bannerUrls = [
+    "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grocery-sale-retail-or-e-commerce-banner-ad-design-template-67720435bb809be27f46dfb1dd44c6fa_screen.jpg?ts=1606113265",
+    "https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg",
+    "https://static.vecteezy.com/system/resources/thumbnails/006/642/998/small/online-shopping-on-website-e-commerce-applications-and-digital-marketing-hand-holding-smartphonwith-the-delivery-man-template-for-banner-web-landing-page-social-media-flat-design-concept-vector.jpg"
+  ];
 
-      {/* Slider */}
-      <div className="mb-6 mt-2">
+  return (
+    <div className="w-full">
+
+      {/* -------- Banner Section -------- */}
+      <div className="w-full">
         <Slider {...sliderSettings}>
-          {[
-            "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grocery-sale-retail-or-e-commerce-banner-ad-design-template-67720435bb809be27f46dfb1dd44c6fa_screen.jpg?ts=1606113265",
-            "https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg",
-            "https://static.vecteezy.com/system/resources/thumbnails/006/642/998/small/online-shopping-on-website-e-commerce-applications-and-digital-marketing-hand-holding-smartphonwith-the-delivery-man-template-for-banner-web-landing-page-social-media-flat-design-concept-vector.jpg"
-          ].map((url, idx) => (
+          {bannerUrls.map((url, idx) => (
             <div key={idx}>
               <img
                 src={url}
                 alt={`Banner ${idx + 1}`}
-                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg"
+                className="w-full h-64 sm:h-80 md:h-96 object-cover"
               />
             </div>
           ))}
         </Slider>
       </div>
 
-      {/* Filters */}
-   <Filter
-  categories={categories}
-  selectedCategory={selectedCategory}
-  onCategoryChange={(cat) => { setSelectedCategory(cat); setCurrentPage(1); }}
-  sortOrder={sortOrder}
-  onSortChange={(order) => setSortOrder(order)}
-/>
+      {/* -------- Page Content -------- */}
+      <div className="px-4 sm:px-6 lg:px-8 mx-auto">
+        {/* Filters */}
+        <Filter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={(cat) => { setSelectedCategory(cat); setCurrentPage(1); }}
+          sortOrder={sortOrder}
+          onSortChange={(order) => setSortOrder(order)}
+        />
 
+        {/* Products Grid */}
+        {currentProducts.length > 0 ? (
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
+            {currentProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 text-lg mt-10">No products found.</p>
+        )}
 
-      {/* Products Grid */}
-      {currentProducts.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
-          {currentProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-500 text-lg mt-10">No products found.</p>
-      )}
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-6 gap-2">
+            <button
+              onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded font-semibold ${currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"}`}
+            >
+              &lt;
+            </button>
+            <button
+              onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded font-semibold ${currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"}`}
+            >
+              &gt;
+            </button>
+          </div>
+        )}
+      </div>
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center mt-6 gap-2">
-          <button
-            onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={`px-4 py-2 rounded font-semibold ${
-              currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"
-            }`}
-          >
-            &lt;
-          </button>
-          <button
-            onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded font-semibold ${
-              currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"
-            }`}
-          >
-            &gt;
-          </button>
-        </div>
-      )}
-      <Footer  />
-
+      <Footer />
     </div>
-   
   );
 };
 
