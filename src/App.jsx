@@ -8,6 +8,7 @@ import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "./context/ThemeContext";
+import ProductCard from "./components/ProductCard";
 
 function App() {
   // Global search state for Navbar
