@@ -6,72 +6,87 @@ const Checkout = () => {
   const { cartItems, total, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
 
-  // Form state
+  // Form state (only shipping details)
   const [form, setForm] = useState({
     name: "",
     email: "",
     address: "",
     city: "",
     zip: "",
-    cardNumber: "",
-    expiry: "",
-    cvv: "",
   });
 
-  const handleChange = (e) => {
+  // Handle input change
+  const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e) => {
+  // Handle Buy Now button
+  const handleBuyNow = (e) => {
     e.preventDefault();
-    // You can add validation here
-    alert("Order placed successfully!");
+    alert(
+      `Order placed successfully!\nA confirmation email has been sent to ${form.email}`
+    );
     // Clear cart after order
-    cartItems.forEach(item => removeFromCart(item.id));
+    cartItems.forEach((item) => removeFromCart(item.id));
     navigate("/"); // redirect to home
   };
 
-  if (cartItems.length === 0) {
+  if (cartItems.length === 0)
     return <p className="text-center p-6">Your cart is empty.</p>;
-  }
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Checkout</h1>
-
-      {/* Cart Summary */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Order Summary</h2>
-        {cartItems.map(item => (
-          <div key={item.id} className="flex justify-between mb-2">
-            <span>{item.title} x {item.quantity}</span>
+    <div className="max-w-6xl mx-auto p-6 flex flex-col md:flex-row gap-6">
+      {/* -----------------------------
+          Left: Cart Summary
+      ----------------------------- */}
+      <div className="md:w-1/2 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg space-y-4">
+        <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">
+          Order Summary
+        </h2>
+        {cartItems.map((item) => (
+          <div
+            key={item.id}
+            className="flex justify-between text-gray-700 dark:text-gray-300"
+          >
+            <span>
+              {item.title} x {item.quantity}
+            </span>
             <span>${(item.price * item.quantity).toFixed(2)}</span>
           </div>
         ))}
-        <div className="flex justify-between font-bold mt-4">
+        <div className="flex justify-between font-bold mt-4 text-gray-900 dark:text-gray-100">
           <span>Total</span>
           <span>${total.toFixed(2)}</span>
         </div>
       </div>
 
-      {/* Shipping & Payment Form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <h2 className="text-xl font-semibold">Shipping Details</h2>
-        <input type="text" name="name" placeholder="Full Name" className="w-full border rounded px-3 py-2" onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email" className="w-full border rounded px-3 py-2" onChange={handleChange} required />
-        <input type="text" name="address" placeholder="Address" className="w-full border rounded px-3 py-2" onChange={handleChange} required />
-        <input type="text" name="city" placeholder="City" className="w-full border rounded px-3 py-2" onChange={handleChange} required />
-        <input type="text" name="zip" placeholder="ZIP Code" className="w-full border rounded px-3 py-2" onChange={handleChange} required />
+      {/* -----------------------------
+          Right: Shipping Form
+      ----------------------------- */}
+      <form
+        onSubmit={handleBuyNow}
+        className="md:w-1/2 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg space-y-4"
+      >
+        <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">
+          Shipping Details
+        </h2>
 
-        <h2 className="text-xl font-semibold mt-4">Payment Details</h2>
-        <input type="text" name="cardNumber" placeholder="Card Number" className="w-full border rounded px-3 py-2" onChange={handleChange} required />
-        <div className="flex gap-2">
-          <input type="text" name="expiry" placeholder="MM/YY" className="w-1/2 border rounded px-3 py-2" onChange={handleChange} required />
-          <input type="text" name="cvv" placeholder="CVV" className="w-1/2 border rounded px-3 py-2" onChange={handleChange} required />
-        </div>
+        {["name", "email", "address", "city", "zip"].map((field) => (
+          <input
+            key={field}
+            type={field === "email" ? "email" : "text"}
+            name={field}
+            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+            className="w-full border rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            onChange={handleChange}
+            required
+          />
+        ))}
 
-        <button type="submit" className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition">
-          Place Order
+        <button
+          type="submit"
+          className="w-full bg-green-600 dark:bg-green-500 text-white py-3 rounded hover:bg-green-700 dark:hover:bg-green-600 transition"
+        >
+          Buy Now
         </button>
       </form>
     </div>

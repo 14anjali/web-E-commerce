@@ -8,7 +8,7 @@ import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "./context/ThemeContext";
-import ProductCard from "./components/ProductCard";
+import Checkout from "./pages/Checkout";
 
 function App() {
   // Global search state for Navbar
@@ -24,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home search={search} />} />
           <Route path="/cart" element={<Cart />} />
+           <Route path="/checkout" element={<Checkout />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           {/* 404 Page */}
@@ -31,7 +32,7 @@ function App() {
             path="*"
             element={<p className="p-6 text-center text-red-600">Page Not Found</p>}
           />
-                    <Route path="/footer" element={<Footer />} />
+     <Route path="/footer" element={<Footer />} />
 
         </Routes>
       </Router>
