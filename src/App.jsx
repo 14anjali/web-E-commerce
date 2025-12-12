@@ -9,6 +9,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "./context/ThemeContext";
 import Checkout from "./pages/Checkout";
+import OrderHistory from "./pages/OrderHistory";
 
 function App() {
   // Global search state for Navbar
@@ -33,7 +34,7 @@ function App() {
             element={<p className="p-6 text-center text-red-600">Page Not Found</p>}
           />
      <Route path="/footer" element={<Footer />} />
-
+ <Route path="/orders" element={<OrderHistory />} />
         </Routes>
       </Router>
     </CartProvider>
