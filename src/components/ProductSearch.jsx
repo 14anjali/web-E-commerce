@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-// ProductSearch component: handles search input and passes value to parent
+// handle Search input
 const ProductSearch = ({ onSearch }) => {
   const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;
     setQuery(value);
-    onSearch(value); // send search value to parent (Navbar/Home)
+    onSearch(value); // send search value to parent Navbar/Home
   };
 
   return (

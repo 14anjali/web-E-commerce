@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader"; // ✅ ADD THIS
 
 const Home = ({ search }) => {
   const [products, setProducts] = useState([]);
@@ -21,6 +22,7 @@ const Home = ({ search }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true); // ✅ start loader
         const res = await fetch("https://dummyjson.com/products?limit=1000");
         if (!res.ok) throw new Error("Failed to fetch products");
         const data = await res.json();
@@ -29,25 +31,39 @@ const Home = ({ search }) => {
         const shuffled = [...data.products].sort(() => 0.5 - Math.random());
         setDisplayProducts(shuffled.slice(0, 20));
 
-        const uniqueCategories = [...new Set(data.products.map(p => p.category?.trim()).filter(Boolean))];
+        const uniqueCategories = [
+          ...new Set(data.products.map(p => p.category?.trim()).filter(Boolean))
+        ];
         setCategories(uniqueCategories);
-
-        setLoading(false);
       } catch (err) {
         console.error(err);
         setError("Unable to load products. Please try again later.");
-        setLoading(false);
+      } finally {
+        setLoading(false); // ✅ stop loader
       }
     };
+
     fetchProducts();
   }, []);
+
+  // Show Loader
+  if (loading) return <Loader />;
+
+  //  Show error
+  if (error)
+    return (
+      <p className="p-6 text-center text-red-600 font-semibold">
+        {error}
+      </p>
+    );
 
   // Filter & sort
   const filteredProducts = displayProducts
     .filter(p => {
-      const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === "All" || p.category === selectedCategory;
       const matchesSearch =
-        !search || 
+        !search ||
         p.title.toLowerCase().includes(search.toLowerCase()) ||
         p.category.toLowerCase().includes(search.toLowerCase());
       return matchesCategory && matchesSearch;
@@ -79,9 +95,6 @@ const Home = ({ search }) => {
     arrows: true,
   };
 
-  if (loading) return <p className="p-6 text-center text-gray-600">Loading products...</p>;
-  if (error) return <p className="p-6 text-center text-red-600 font-semibold">{error}</p>;
-
   const bannerUrls = [
     "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grocery-sale-retail-or-e-commerce-banner-ad-design-template-67720435bb809be27f46dfb1dd44c6fa_screen.jpg?ts=1606113265",
     "https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg",
@@ -90,34 +103,31 @@ const Home = ({ search }) => {
 
   return (
     <div className="w-full">
+      {/* Banner */}
+      <Slider {...sliderSettings}>
+        {bannerUrls.map((url, idx) => (
+          <img
+            key={idx}
+            src={url}
+            alt={`Banner ${idx + 1}`}
+            className="w-full h-64 sm:h-80 md:h-96 object-cover"
+          />
+        ))}
+      </Slider>
 
-      {/* -------- Banner Section -------- */}
-      <div className="w-full">
-        <Slider {...sliderSettings}>
-          {bannerUrls.map((url, idx) => (
-            <div key={idx}>
-              <img
-                src={url}
-                alt={`Banner ${idx + 1}`}
-                className="w-full h-64 sm:h-80 md:h-96 object-cover"
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
-
-      {/* -------- Page Content -------- */}
+      {/* Content */}
       <div className="px-4 sm:px-6 lg:px-8 mx-auto">
-        {/* Filters */}
         <Filter
           categories={categories}
           selectedCategory={selectedCategory}
-          onCategoryChange={(cat) => { setSelectedCategory(cat); setCurrentPage(1); }}
+          onCategoryChange={(cat) => {
+            setSelectedCategory(cat);
+            setCurrentPage(1);
+          }}
           sortOrder={sortOrder}
           onSortChange={(order) => setSortOrder(order)}
         />
 
-        {/* Products Grid */}
         {currentProducts.length > 0 ? (
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
             {currentProducts.map((product) => (
@@ -125,23 +135,33 @@ const Home = ({ search }) => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 text-lg mt-10">No products found.</p>
+          <p className="text-center text-gray-500 text-lg mt-10">
+            No products found.
+          </p>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex justify-center mt-6 gap-2">
             <button
               onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
               disabled={currentPage === 1}
-              className={`px-4 py-2 rounded font-semibold ${currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"}`}
+              className={`px-4 py-2 rounded font-semibold ${
+                currentPage === 1
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
             >
               &lt;
             </button>
+
             <button
               onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className={`px-4 py-2 rounded font-semibold ${currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"}`}
+              className={`px-4 py-2 rounded font-semibold ${
+                currentPage === totalPages
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
             >
               &gt;
             </button>

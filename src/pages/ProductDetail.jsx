@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -51,7 +52,7 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <p className="p-6 text-center text-black dark:text-white">Loading product...</p>;
+if (loading) return <Loader />;
   if (!product) return <p className="p-6 text-center text-red-500">Product not found.</p>;
 
   const discountedPrice = (product.price * (1 - (product.discountPercentage || 0) / 100)).toFixed(2);
