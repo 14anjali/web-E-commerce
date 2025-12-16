@@ -6,7 +6,7 @@ const Checkout = () => {
   const { cartItems, total, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
 
-  // Form state (only shipping details)
+  // Shipping form state
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -19,15 +19,38 @@ const Checkout = () => {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  // Handle Buy Now button
+  // Handle Buy Now
   const handleBuyNow = (e) => {
     e.preventDefault();
+
+    // 1️ Create order object
+    const newOrder = {
+      id: Date.now(),
+      date: new Date().toLocaleDateString(),
+      status: "Placed",
+      items: cartItems,
+      total: total,
+      shippingDetails: form,
+    };
+
+    // 2️ Get existing orders
+    const existingOrders =
+      JSON.parse(localStorage.getItem("orders")) || [];
+
+    // 3️ Save new order
+    existingOrders.push(newOrder);
+    localStorage.setItem("orders", JSON.stringify(existingOrders));
+
+    // 4️ Confirmation
     alert(
       `Order placed successfully!\nA confirmation email has been sent to ${form.email}`
     );
-    // Clear cart after order
+
+    // 5️ Clear cart
     cartItems.forEach((item) => removeFromCart(item.id));
-    navigate("/"); // redirect to home
+
+    // 6️ Navigate to Order History
+    navigate("/cart");
   };
 
   if (cartItems.length === 0)
@@ -35,13 +58,12 @@ const Checkout = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 flex flex-col md:flex-row gap-6">
-      {/* -----------------------------
-          Left: Cart Summary
-      ----------------------------- */}
+      {/* Order Summary */}
       <div className="md:w-1/2 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg space-y-4">
         <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">
           Order Summary
         </h2>
+
         {cartItems.map((item) => (
           <div
             key={item.id}
@@ -53,15 +75,14 @@ const Checkout = () => {
             <span>${(item.price * item.quantity).toFixed(2)}</span>
           </div>
         ))}
+
         <div className="flex justify-between font-bold mt-4 text-gray-900 dark:text-gray-100">
           <span>Total</span>
           <span>${total.toFixed(2)}</span>
         </div>
       </div>
 
-      {/* -----------------------------
-          Right: Shipping Form
-      ----------------------------- */}
+      {/* Shipping Form */}
       <form
         onSubmit={handleBuyNow}
         className="md:w-1/2 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg space-y-4"
