@@ -105,7 +105,7 @@ Open http://localhost:5173
 
 Contributions are always welcome!
 
-![Home Page](screenshots/home-page.png)
+![Home Page](/public/screenshot/home-page.png)
 ![Product Detail](screenshots/productDetail-page.png)
 ![Cart Page](screenshots/cart-page.png)
 ![Checkout Page](screenshots/checkout-page.png)
