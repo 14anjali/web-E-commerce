@@ -106,11 +106,11 @@ Open http://localhost:5173
 Contributions are always welcome!
 
 ![Home Page](/public/screenshot/home-page.png)
-![Product Detail](screenshots/productDetail-page.png)
-![Cart Page](screenshots/cart-page.png)
-![Checkout Page](screenshots/checkout-page.png)
-![OrderHistory](screenshots/orderHistory-page.png)
-![Wishlist](screenshots/wishlist-page.png)
+![Product Detail](/public/screenshot/productDetail-page.png)
+![Cart Page](/public/screenshot/cart-page.png)
+![Checkout Page](/public/screenshot/checkout-page.png)
+![OrderHistory](/public/screenshot/orderHistory-page.png)
+![Wishlist](/public/screenshot/wishlist-page.png)
 
 
 ## Future Improvements
