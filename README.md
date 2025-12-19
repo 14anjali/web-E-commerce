@@ -17,19 +17,25 @@ A modern **React.js-based e-commerce web application** with cart and wishlist fu
 ```
 src/
 ├─ components/
-│  ├─ Navbar.jsx
-│  ├─ ProductCard.jsx
-│  ├─ ProductSearch.jsx
-│  └─ Filter.jsx
+│  ├─ Banner.jsx            # Homepage carousel/banner
+│  ├─ Filter.jsx            # Product filtering component
+│  ├─ Loader.jsx            # Loading spinner for API fetch
+│  ├─ Navbar.jsx            # Navigation bar with search, cart, wishlist
+│  ├─ ProductCard.jsx       # Individual product card
+│  ├─ ProductSearch.jsx     # Search bar component
+│  └─ ThemeToggle.jsx       # Dark/Light theme toggle
 ├─ context/
-│  └─ CartContext.jsx
+│  └─ CartContext.jsx       # Cart and wishlist state management
 ├─ pages/
-│  ├─ Home.jsx
-│  ├─ Cart.jsx
-│  ├─ Wishlist.jsx
-│  └─ ProductDetail.jsx
+│  ├─ Home.jsx              # Homepage
+│  ├─ Cart.jsx              # Shopping cart page
+│  ├─ Checkout.jsx          # Checkout page
+│  ├─ OrderHistory.jsx      # User order history page
+│  ├─ ProductDetail.jsx     # Product details page
+│  └─ Wishlist.jsx          # Wishlist page
 ├─ App.jsx
 └─ index.js
+
 ```
 ## Features
 
@@ -38,11 +44,13 @@ src/
 - Fully responsive design for mobile, tablet, and desktop.
 - Navbar with **search bar**, **wishlist**, and **cart** indicators.
 - Footer with navigation links and contact information.
+- Loader/spinner displayed while fetching data from API.
 
 ### **Home Page**
 - Product listing with **category filter**, **sorting**, and **pagination**.
 - Random featured products section on homepage.
 - Product search functionality integrated with navbar.
+- Dynamic data fetching from DummyJSON API with loading indicator.
 
 ### **Product Detail Page**
 - Display of **product images**, **selected image preview**, and **thumbnail gallery**.
@@ -61,7 +69,21 @@ src/
 - View all wishlist items.
 - Add items to cart from wishlist.
 - Remove items from wishlist.
-## **Installation & Setup**
+
+### **Checkout Page**
+- Order summary with all cart items and total price.
+- Form with basic validation (name, address, email).
+- “Place Order” button (dummy, no payment integration).
+
+### **Order History Page**
+- Displays all previously placed orders (dummy data).
+- View order details including items, price, and date.
+
+### **Additional Features**
+
+- Dark/Light theme toggle for better user experience.
+- Pagination for product listings to improve browsing.
+- Loader/spinner while fetching products from API.## **Installation & Setup**
 
 1. **Clone the repository:**
    ```bash
@@ -79,14 +101,17 @@ npm start
 ```
 Open http://localhost:5173
  to view in the browser.
-## Optimizations
-
-What optimizations did you make in your code? E.g. refactors, performance improvements, accessibility
-
-
 ## Contributing
 
 Contributions are always welcome!
+
+![Home Page](screenshots/home-page.png)
+![Product Detail](screenshots/productDetail-page.png)
+![Cart Page](screenshots/cart-page.png)
+![Checkout Page](screenshots/checkout-page.png)
+![OrderHistory](screenshots/orderHistory-page.png)
+![Wishlist](screenshots/wishlist-page.png)
+
 
 ## Future Improvements
 
