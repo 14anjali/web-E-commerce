@@ -5,7 +5,6 @@ export const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
 
-  // Load theme from localStorage on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {

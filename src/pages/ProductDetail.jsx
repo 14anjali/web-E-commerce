@@ -179,7 +179,7 @@ if (loading) return <Loader />;
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {reviews.map((r, idx) => (
                   <div key={idx} className="border rounded-lg p-4 shadow hover:shadow-md transition-colors duration-300 flex flex-col gap-2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-start justify-between gap-2 flex-wrap">
                       <div className="flex flex-col">
                         <span className="font-semibold text-black dark:text-white">{r.reviewerName || r.user}</span>
                         <span className="text-gray-500 dark:text-gray-400 text-sm">{r.reviewerEmail || "N/A"}</span>
